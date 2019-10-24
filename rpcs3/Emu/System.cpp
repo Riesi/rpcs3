@@ -211,6 +211,9 @@ void fmt_class_string<audio_renderer>::format(std::string& out, u64 arg)
 #ifdef HAVE_PULSE
 		case audio_renderer::pulse: return "PulseAudio";
 #endif
+#ifdef HAVE_SDL2
+		case audio_renderer::sdl2: return "SDL2";
+#endif
 		case audio_renderer::openal: return "OpenAL";
 #ifdef HAVE_FAUDIO
 		case audio_renderer::faudio: return "FAudio";

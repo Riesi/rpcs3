@@ -106,6 +106,9 @@ enum class audio_renderer
 #ifdef HAVE_FAUDIO
 	faudio,
 #endif
+#ifdef HAVE_SDL2
+	sdl2,
+#endif
 };
 
 enum class camera_handler

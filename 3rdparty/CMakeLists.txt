@@ -282,6 +282,22 @@ if(USE_PULSE)
 	endif()
 endif()
 
+# SDL2
+set(SDL2_TARGET 3rdparty_dummy_lib)
+if(USE_SDL2)
+	pkg_check_modules(SDL2 sdl2)
+
+	if(SDL2_FOUND)
+		add_library(3rdparty_sdl2 INTERFACE)
+		target_compile_definitions(3rdparty_sdl2 INTERFACE -DHAVE_SDL2)
+		target_include_directories(3rdparty_sdl2 SYSTEM
+			INTERFACE ${SDL2_INCLUDE_DIRS})
+		target_link_libraries(3rdparty_sdl2 INTERFACE ${SDL2_LDFLAGS})
+
+		set(SDL2_TARGET 3rdparty_sdl2)
+	endif()
+endif()
+
 # libevdev
 set(LIBEVDEV_TARGET 3rdparty_dummy_lib)
 if(USE_LIBEVDEV)
@@ -428,6 +444,7 @@ add_library(3rdparty::discord-rpc ALIAS 3rdparty_discord-rpc)
 add_library(3rdparty::alsa ALIAS ${ALSA_TARGET})
 add_library(3rdparty::pulse ALIAS ${PULSE_TARGET})
 add_library(3rdparty::faudio ALIAS ${FAUDIO_TARGET})
+add_library(3rdparty::sdl2 ALIAS ${SDL2_TARGET})
 add_library(3rdparty::libevdev ALIAS ${LIBEVDEV_TARGET})
 add_library(3rdparty::vulkan ALIAS ${VULKAN_TARGET})
 add_library(3rdparty::openal ALIAS 3rdparty_openal)

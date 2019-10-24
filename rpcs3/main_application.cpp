@@ -34,6 +34,9 @@
 #ifdef HAVE_FAUDIO
 #include "Emu/Audio/FAudio/FAudioBackend.h"
 #endif
+#ifdef HAVE_SDL2
+#include "Emu/Audio/SDL2/SDL2Backend.h"
+#endif
 
 #include "Emu/RSX/GSRender.h"
 #include "Emu/RSX/Null/NullGSRender.h"
@@ -156,7 +159,9 @@ EmuCallbacks main_application::CreateCallbacks()
 #ifdef HAVE_PULSE
 		case audio_renderer::pulse: return std::make_shared<PulseBackend>();
 #endif
-
+#ifdef HAVE_SDL2
+		case audio_renderer::sdl2: return std::make_shared<SDL2Backend>();
+#endif
 		case audio_renderer::openal: return std::make_shared<OpenALBackend>();
 #ifdef HAVE_FAUDIO
 		case audio_renderer::faudio: return std::make_shared<FAudioBackend>();
